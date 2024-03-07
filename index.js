@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
   res.render('index.ejs', { name: 'Peter'});
 });
 
+// anything beginning with "/api" will go into this
+const apiRouter = require('./routes/api')
+app.use('/api', apiRouter);
+
 app.use((req, res) => {
   res.status(404).render('404');
 });
