@@ -13,6 +13,9 @@ app.get('/', (req, res) => {
   res.render('index.ejs', { name: 'Peter'});
 });
 
+const loginsRouter = require('./routes/logins')
+app.use('/logins', loginsRouter);
+
 // anything beginning with "/api" will go into this
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter);
