@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   //     {id: 7, username: 'bilbob', password: 'example'}
   // ];
   try {
-      let theLogins = await loginsDal.getLogins(); 
+     let theLogins = await loginsDal.getLogins(); 
       if(DEBUG) console.table(theLogins);
       res.render('logins', {theLogins});
   } catch {
@@ -22,7 +22,8 @@ router.post('/', async (req, res) => {
   try {
       await loginsDal.addLogin(req.body.username, req.body.password);
       res.redirect('/logins/');
-  } catch {
+  } catch (err){
+ //     if(DEBUG) console.log(err);
       // log this error to an error log file.
       res.render('503');
   } 
