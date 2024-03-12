@@ -1,26 +1,25 @@
-const express = require('express');
-const methodOverride = require('method-override');
-const app = express();
-const PORT = 3000;
+const express = require('express');  // Import the Express framework
+const methodOverride = require('method-override');  // Import the method-override middleware
+const app = express();  // Create an instance of the Express application
+const PORT = 3000;  // Set the port number for the server to listen on
 
-global.DEBUG = true;
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true, })); // This is important!
-app.use(methodOverride('_method')); // So is this!
+global.DEBUG = true;  // Set a global DEBUG variable to true
 
-app.get('/', (req, res) => {
-  res.render('index.ejs', { name: 'Peter'});
+app.set('view engine', 'ejs');  // Set the view engine to EJS
+app.use(express.static('public'));  // Serve static files from the 'public' directory
+app.use(express.urlencoded({ extended: true }));  // Parse URL-encoded bodies (important for form submissions)
+app.use(methodOverride('_method'));  // Override HTTP methods with a query value '_method' (e.g., for PUT and DELETE)
+
+app.get('/', (req, res) => {  // Define a route for the root URL ('/')
+  res.render('index.ejs', { name: 'KATERYNA' });  // Render the 'index.ejs' template with data (in this case, the name 'Peter')
 });
+const apiRouter = require('./routes/api');  // Use the '/api' prefix for routes defined in the 'apiRouter' module
 
-// anything beginning with "/api" will go into this
-const apiRouter = require('./routes/api')
 app.use('/api', apiRouter);
 
-app.use((req, res) => {
+app.use((req, res) => {  // Handle 404 errors by rendering the '404.ejs' template
   res.status(404).render('404');
 });
-
-app.listen(PORT, () => {
-  console.log(`Simple app running on port ${PORT}.`)
+app.listen(PORT, () => {  // Start the server, listening on the specified port
+  console.log(`Simple app running on port ${PORT}.`);
 });

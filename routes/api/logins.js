@@ -1,5 +1,5 @@
 var router = require('express').Router();
-const loginsDal = require('../../services/pg.logins.dal')
+const loginsDal = require('../../services/pg.logins.dal') // Import the DAL page pg.logins.dal.js
 
 // api/logins
 router.get('/', async (req, res) => {
