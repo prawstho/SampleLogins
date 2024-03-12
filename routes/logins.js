@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
       await loginsDal.addLogin(req.body.username, req.body.password);
       res.redirect('/logins/');
   } catch (err){
-      if(DEBUG) console.log(err);
+ //     if(DEBUG) console.log(err);
       // log this error to an error log file.
       res.render('503');
   } 
