@@ -8,8 +8,8 @@
             <% if (theLogins.length > 0) { %>
                 <% theLogins.forEach(login => { %>
                     <b><%= login.username %></b>
-                    <a href="/logins/<%=login.id%>/edit?username=<%=login.username%>">edit</a>
-                    <a href="/logins/<%=login.id%>/delete?username=<%=login.username%>">delete</a></br> 
+                    <a href="/logins/<%=login._id%>/edit?username=<%=login.username%>">edit</a>
+                    <a href="/logins/<%=login._id%>/delete?username=<%=login.username%>">delete</a></br> 
                     <% }) %>
             <% } %>
             </br><label>Add Login:</label></br>
