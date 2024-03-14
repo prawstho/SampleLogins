@@ -8,7 +8,7 @@
             <% if (theLogins.length > 0) { %>
                 <% theLogins.forEach(login => { %>
                     <b><%= login.username %></b>
-                    <a href="/logins/<%=login._id%>/edit?username=<%=login.username%>">edit</a>
+                    <a href="/logins/<%=login._id%>/edit?username=<%=login.username%>&email=<%=login.email%>">edit</a>
                     <a href="/logins/<%=login._id%>/delete?username=<%=login.username%>">delete</a></br> 
                     <% }) %>
             <% } %>
@@ -18,6 +18,9 @@
             </label>
             <label>Password:
                 <input type="password" id="password" name="password" value="<%= locals.password %>" required>
+            </label>
+            <label>Email:
+                <input type="email" id="email" name="email" value="<%= locals.email %>" required>
             </label>
             </br>
             <button>POST</button>
