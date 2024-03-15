@@ -12,6 +12,8 @@ router.get('/', async (req, res) => {
         res.statusCode = 503;
         res.json({message: "Service Unavailable", status: 503});
     }
+
+    
 });
 
 module.exports = router;

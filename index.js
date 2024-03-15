@@ -13,6 +13,9 @@ app.use(methodOverride('_method'));  // Override HTTP methods with a query value
 app.get('/', (req, res) => {  // Define a route for the root URL ('/')
   res.render('index.ejs', { name: 'KATERYNA' });  // Render the 'index.ejs' template with data (in this case, the name 'Peter')
 });
+
+const loginsRouter = require('./routes/logins');  // Import the 'loginsRouter' module
+app.use('/logins', loginsRouter);  // Use the '/logins' prefix for routes defined in the 'loginsRouter' module
 const apiRouter = require('./routes/api');  // Use the '/api' prefix for routes defined in the 'apiRouter' module
 
 app.use('/api', apiRouter);
