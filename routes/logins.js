@@ -2,8 +2,8 @@ const express = require('express');
 const uuid = require('uuid');
 
 const router = express.Router();
-const loginsDal = require('../services/pg.logins.dal')
-// const loginsDal = require('../services/m.logins.dal')
+// const loginsDal = require('../services/pg.logins.dal')
+const loginsDal = require('../services/m.logins.dal')
 
 router.get('/', async (req, res) => {
   // const theLogins = [
