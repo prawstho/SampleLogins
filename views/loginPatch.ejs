@@ -6,7 +6,6 @@
             <form action="/logins/<%= locals.theId %>?_method=PATCH" method="POST">
                 <label>Edit Login Fields:</br>
                     <input type="text" name="username" value="<%= locals.username %>" required>
-                    <input type="text" name="password" value="<%= locals.password %>" required>
                     <input type="text" name="email" value="<%= locals.email %>" required>
                 </label></br>
                 <button>PATCH</button>

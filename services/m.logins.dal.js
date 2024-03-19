@@ -22,8 +22,8 @@ async function getLoginByLoginId(id) {
     const database = dal.db("Auth");
     const collection = database.collection("logins");
     const result = await collection.find({ _id: new ObjectId(id) }).toArray();
-    if(DEBUG) console.log(result);
-    return result;
+    if(DEBUG) console.log(result[0]);
+    return result[0];
   } catch(error) {
     console.error('Error occurred while connecting to MongoDB:', error);
     throw error;
@@ -48,13 +48,13 @@ async function addLogin(username, password, email, uuid) {
     dal.close();
   }
 };
-async function patchLogin(id, username, password, email) {
+async function patchLogin(id, username, email) {
   if(DEBUG) console.log("logins.mongo.dal.patchLogin()");
   try {
     await dal.connect();
     const result = await dal.db("Auth").collection("logins")
       .updateOne({_id: new ObjectId(id)},
-        {$set: {username: username, password: password, email: email}},
+        {$set: {username: username, email: email}},
         {upsert: true, returnDocument: 'after'}
         );
     return result;
