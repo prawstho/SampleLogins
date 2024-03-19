@@ -1,37 +1,33 @@
 const express = require('express');
 const uuid = require('uuid');
-
 const router = express.Router();
+const bcrypt = require('bcrypt');
+
 // const loginsDal = require('../services/pg.logins.dal')
 const loginsDal = require('../services/m.logins.dal')
 
 router.get('/', async (req, res) => {
-  // const theLogins = [
-  //     {id: 1, username: 'example', password: 'example'},
-  //     {id: 4, username: 'frodob', password: 'example'},
-  //     {id: 7, username: 'bilbob', password: 'example'}
-  // ];
   try {
      let theLogins = await loginsDal.getLogins(); 
       if(DEBUG) console.table(theLogins);
       res.render('logins', {theLogins});
-  } catch {
+  } catch (err) {
+      if(DEBUG) console.log(err);
+      // log this error to an error log file.
       res.render('503');
   }
 });
 
 router.get('/:id', async (req, res) => {
-  // const aLogin = [
-  //    {id: 1, username: 'example', password: 'example'}
-  // ];
   try {
       let aLogin = await loginsDal.getLoginByLoginId(req.params.id); // from postgresql
-      if(DEBUG) console.table(aLogin);
-      if (aLogin.length === 0)
-          res.render('norecord')
-      else
-          res.render('login', {aLogin});
-  } catch {
+      if (aLogin === undefined) {
+        res.render('norecord');
+      } else {
+        if(DEBUG) console.table(aLogin);
+        res.render('login', {aLogin});
+      }
+  } catch (err) {
       res.render('503');
   }
 });
@@ -49,10 +45,13 @@ router.get('/:id/delete', async (req, res) => {
 router.post('/', async (req, res) => {
   if(DEBUG) console.log("logins.POST");
   try {
-      await loginsDal.addLogin(req.body.username, req.body.password, req.body.email, uuid.v4());
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      if(DEBUG) console.log('hashedPassword: ' + hashedPassword);
+      let result = await loginsDal.addLogin(req.body.username, hashedPassword, req.body.email, uuid.v4());
+      if(DEBUG) console.log('result: ' + result);
       res.redirect('/logins/');
-  } catch (err){
- //     if(DEBUG) console.log(err);
+  } catch (err) {
+      if(DEBUG) console.log(err);
       // log this error to an error log file.
       res.render('503');
   } 
@@ -61,9 +60,10 @@ router.post('/', async (req, res) => {
 router.patch('/:id', async (req, res) => {
   if(DEBUG) console.log('logins.PATCH: ' + req.params.id);
   try {
-      await loginsDal.patchLogin(req.params.id, req.body.username, req.body.password, req.body.email);
+      await loginsDal.patchLogin(req.params.id, req.body.username, req.body.email);
       res.redirect('/logins/');
-  } catch {
+  } catch (err) {
+      if(DEBUG) console.log(err);
       // log this error to an error log file.
       res.render('503');
   }
@@ -74,8 +74,9 @@ router.delete('/:id', async (req, res) => {
   try {
       await loginsDal.deleteLogin(req.params.id);
       res.redirect('/logins/');
-  } catch {
-      // log this error to an error log file.
+  } catch (err) {
+    // if(DEBUG) console.log(err);
+    // log this error to an error log file.
       res.render('503');
   }
 });

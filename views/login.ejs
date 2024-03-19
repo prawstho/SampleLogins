@@ -4,11 +4,9 @@
         <%- include('./partials/nav.ejs') %>
         <div class="login content">
             <h2>Login:</h2>
-            <% if (aLogin.length > 0) 
-                var login = aLogin[0];{ %>
-                <h3><%= login.username %> <%= login.password %> <%= login.email %>
-                </h3> 
-            <% } %>
+            <h3>username: <%= aLogin.username %></br>
+            password: <%= aLogin.password %></h3>
+            <h4>email: <%= aLogin.email %></h4>
         </div>
     </body>
     <%- include('./partials/foot.ejs') %>
