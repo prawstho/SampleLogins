@@ -1,10 +1,10 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'peter',
-  host: 'localhost',
-  database: 'Auth',
-  password: 'royisanerd',
-  port: 5434,
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
 });
 
 if(DEBUG) console.log("connected to PostgreSQL...");
