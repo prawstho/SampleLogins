@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "65fa261f337c849d5e414fd3"
+  },
+  "username": "walter",
+  "password": "$2b$10$/UdQs/2jV7V5nhNtMVzzfOU6nkjWcmaZf/NnDHdKlTiqEBXM2dlO6",
+  "email": "walter@example.com",
+  "uuid": "c0735ec7-8bbe-481b-8b4e-a5a9e371bb58"
+},
+{
+  "_id": {
+    "$oid": "65fac49090275ade4f91175e"
+  },
+  "username": "bubba",
+  "password": "$2b$10$qVI7KH.z/eTZ.TbY01ci7.TqCpMFfIU/B4FyKTlew61sFRInagPYu",
+  "email": "bubba@example.com",
+  "uuid": "837b5d9b-db38-4665-b8ed-d1eb47c7951d"
+},
+{
+  "_id": {
+    "$oid": "65fac49a90275ade4f91175f"
+  },
+  "username": "peter",
+  "password": "$2b$10$B8isUMFIoWUvvZtI4sPa9.K3x5RUjkNE1jqKNwSaJ21OVqSdbo.oi",
+  "email": "peter@rawsthorne.org",
+  "uuid": "35dc08b2-6098-441c-895d-b6273d015d95"
+},
+{
+  "_id": {
+    "$oid": "65fac4a990275ade4f911760"
+  },
+  "username": "sam",
+  "password": "$2b$10$YEtfChG3a1zH6hao6i8NceqOVbsoKR0uWz.b1sthoE5SicYm0pL5m",
+  "email": "sam@example.com",
+  "uuid": "2d87c572-2c1f-4e3a-8e2c-b1cdaaee40f2"
+}]
