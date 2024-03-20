@@ -2,12 +2,10 @@ var router = require('express').Router();
 
 if(DEBUG) {
     console.log('ROUTE: /api');
-    console.log('ROUTE: /api/logins')
-    console.log('ROUTE: /api/users')
 }
 
 router.get('/', (req, res) => {
-    res.send('API Home Page');
+    res.render('apihome');
 });
 
 // http://localhost:3000/api/logins/

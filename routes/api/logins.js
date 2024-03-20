@@ -2,6 +2,8 @@ var router = require('express').Router();
 // const loginsDal = require('../../services/pg.logins.dal')
 const loginsDal = require('../../services/m.logins.dal')
 
+if(DEBUG) console.log('ROUTE: /api/logins');
+   
 // api/logins
 router.get('/', async (req, res) => {
     if(DEBUG) console.log('ROUTE: /api/logins/ GET ' + req.url);
