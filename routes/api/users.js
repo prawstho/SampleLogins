@@ -1,6 +1,8 @@
 var router = require('express').Router();
 const usersDal = require('../../services/m.users.dal')
 
+if(DEBUG) console.log('ROUTE: /api/users');
+
 // api/users - GET a list of all users
 router.get('/', async (req, res) => {
   if(DEBUG) console.log('REQUEST: /api/users/ GET ' + req.url);
@@ -23,8 +25,15 @@ router.get('/', async (req, res) => {
 // api/users/:id - GET a single user
 router.get('/:id', async (req, res) => {
   if(DEBUG) console.log('REQUEST: /api/users/:id GET ' + req.url);
-  // make sure we send data back to the browser
-  res.send('REQUEST: /api/users/:id GET ' + req.url)
+  try {
+    let theUser = await usersDal.getUserByUserId(req.params.id); 
+    res.json(theUser);
+  } catch (err) {
+    // log this error to an event log file.
+    res.statusCode = 503;
+    res.json({message: "Service Unavailable", status: 503});
+    console.log(err);
+  }
 });
 
 module.exports = router;
