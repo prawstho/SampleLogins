@@ -1,5 +1,6 @@
 var router = require('express').Router();
-const usersDal = require('../../services/m.users.dal')
+const usersDal = require('../../services/m.users.dal') // MongoDB DAL for users
+// const usersDal = require('../../services/pg.users.dal') // PostgreSQL DAL for users
 
 if(DEBUG) console.log('ROUTE: /api/users');
 
