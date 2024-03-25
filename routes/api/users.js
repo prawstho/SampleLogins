@@ -37,4 +37,23 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.post('/', async (req,res) => {
+  if(DEBUG) console.log('REQUEST: /api/users/ POST ' + req.url);
+  try {
+    var result = await usersDal.addUser(req.body.firstName, 
+    req.body.lastName, req.body.username);
+    if(result === 11000) {
+      res.status = 409;
+      // res.json({message: "Duplicate username", status: 409});
+    }
+    else
+      res.json({message: "New user added", status: 200});
+  } catch (error) {
+    // log this error to an event log file.
+    res.statusCode = 503;
+    res.json({message: "Service Unavailable", status: 503});
+    console.log(err);
+  }
+})
+
 module.exports = router;

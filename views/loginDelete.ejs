@@ -5,7 +5,7 @@
         <div class="delete content">
             <form action="/logins/<%= locals.theId %>?_method=DELETE" method="POST">
                 <label>Are you sure you want to delete this Login?</br>
-                    <input type="text" id="<%= locals.theId %>" name="login" value="<%= locals.username %>" readonly>
+                    <input type="text" id="<%= theId %>" name="login" value="<%= username %>" readonly>
                 </label>
                 <button>DELETE</button>
             </form>

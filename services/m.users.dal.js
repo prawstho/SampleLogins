@@ -43,7 +43,32 @@ async function getUserByUserId(id) {
   }
 };
 
+// async function addUser(firstName, lastName, userName, gender, smsPhone, profileUrl, joinDate, birthDate) {
+async function addUser(firstName,lastName,username) {
+  if(DEBUG) console.log("users.mongo.dal.addUser()");
+  let newUser = JSON.parse(`{"first_name": "${firstName}", "last_name": "${lastName}", "username": "${username}"}`);
+  if(DEBUG) console.log(newUser);
+  try {
+    await dal.connect();
+    const result = await dal.db("Auth").collection("users").insertOne(newUser);
+    if(DEBUG) console.log(`insertedId: ${result.insertedId}`)
+    return result.insertedId;
+  } catch (error) {
+    if(DEBUG) console.log(`mongo error: ${error.code}`)
+    if(error.code === 11000) {
+      return error.code;
+    }
+    // record the error in event logging
+    console.log(error);
+    throw error;
+  } finally {
+    dal.close();
+  }
+}
+
+
 module.exports = {
   getUsers,
   getUserByUserId,
+  addUser,
 }
