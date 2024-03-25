@@ -1,0 +1,9 @@
+{
+  "_id": {
+    "$oid": "65fac49090275ade4f91175e"
+  },
+  "username": "bubba",
+  "password": "$2b$10$qVI7KH.z/eTZ.TbY01ci7.TqCpMFfIU/B4FyKTlew61sFRInagPYu",
+  "email": "bubba@example.com",
+  "uuid": "837b5d9b-db38-4665-b8ed-d1eb47c7951d"
+}
